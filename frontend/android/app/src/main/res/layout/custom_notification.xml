@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    >
+    <!-- android:background="@android:color/white" -->
+
+    <!-- Start Label -->
+    <TextView
+        android:id="@+id/startLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="14sp"
+        android:paddingRight="16dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"/>
+
+    <!-- End Label -->
+    <TextView
+        android:id="@+id/endLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="14sp"
+        android:paddingLeft="16dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"/>
+
+    <!-- Custom ProgressBar -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_toStartOf="@id/endLabel"
+        android:layout_toEndOf="@id/startLabel"
+        android:progressDrawable="@drawable/progress_custom"
+        android:max="10"
+        android:progress="4"
+        android:layout_centerVertical="true"/>
+
+</RelativeLayout>

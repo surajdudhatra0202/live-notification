@@ -6,7 +6,9 @@ import {
   AuthorizationStatus,
 } from '@react-native-firebase/messaging';
 import notifee, { AndroidImportance } from '@notifee/react-native';
-import { Platform, Alert } from 'react-native';
+import { Platform, Alert, NativeModules } from 'react-native';
+
+const { CustomNotification } = NativeModules;
 
 export async function requestUserPermission() {
   const messaging = getMessaging();
@@ -41,45 +43,29 @@ export function setupForegroundHandler() {
   onMessage(messaging, async remoteMessage => {
     const { data } = remoteMessage;
 
-
-    // Use a persistent ID so the notification can be updated
-    const NOTIFICATION_ID = 'task_progress_notification';
-
     const title = data?.title ?? 'Notification';
     const body = data?.body ?? '';
     const totalCalls = parseInt(data?.totalCalls ?? '0');
     const completedCalls = parseInt(data?.completedCalls ?? '0');
     const pendingCalls = totalCalls - completedCalls;
 
+    CustomNotification.show(0, totalCalls, completedCalls);
     // console.log(totalCalls, completedCalls);
     // console.log(remoteMessage);
-
-    // Create the RemoteViews object from your XML layout
-    const customViews = await notifee.getRemoteViews(
-      'notification_custom_layout',
-    );
-
-    // Update the views in your custom layout with data from the message
-    await customViews.setTextViewText('notification_title', title);
-    await customViews.setTextViewText('notification_body', body);
-    await customViews.setProgressBar(
-      'notification_progress_bar',
-      totalCalls,
-      completedCalls,
-      false,
-    );
-
-    // Optional: You can also change the text color or background
-    // await customViews.setTextViewTextColor('notification_title', AndroidColor.parse('#FF5722'));
-
     await notifee.displayNotification({
-      id: NOTIFICATION_ID,
+      id: 'live-tracking',
       title: title,
       body: body,
       android: {
         channelId: 'default',
-        importance: AndroidImportance.HIGH,
-        setContentView : customViews,
+        asForegroundService: true, // ✅ required
+        color: '#0E7C66', // 🟢 Background color
+        colorized: true, // ✅ makes whole background colored
+        onlyAlertOnce: true,
+        progress: {
+          max: totalCalls,
+          current: completedCalls,
+        },
       },
     });
   });
