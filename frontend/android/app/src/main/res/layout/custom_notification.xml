@@ -1,46 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp"
-    >
-    <!-- android:background="@android:color/white" -->
+    android:orientation="vertical"
+    android:elevation="4dp"
+    android:clipToPadding="false"
+    android:clipToOutline="true">
 
-    <!-- Start Label -->
-    <TextView
-        android:id="@+id/startLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0"
-        android:textColor="@android:color/holo_blue_dark"
-        android:textSize="14sp"
-        android:paddingRight="16dp"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"/>
-
-    <!-- End Label -->
-    <TextView
-        android:id="@+id/endLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="10"
-        android:textColor="@android:color/holo_blue_dark"
-        android:textSize="14sp"
-        android:paddingLeft="16dp"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"/>
-
-    <!-- Custom ProgressBar -->
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="@android:style/Widget.ProgressBar.Horizontal"
+    <!-- Call Type Row -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:layout_toStartOf="@id/endLabel"
-        android:layout_toEndOf="@id/startLabel"
-        android:progressDrawable="@drawable/progress_custom"
-        android:max="10"
-        android:progress="4"
-        android:layout_centerVertical="true"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
 
-</RelativeLayout>
+        <!-- Call Icon -->
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@android:drawable/ic_menu_call"
+            android:tint="@android:color/black"
+            android:contentDescription="Call Icon" />
+
+        <!-- Call Type -->
+        <TextView
+            android:id="@+id/callType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Sales Call"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#000000"/>
+    </LinearLayout>
+
+    <!-- Timeline Row (Start - Progress - End) -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="8dp">
+
+        <!-- Start Label -->
+        <TextView
+            android:id="@+id/startLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start"
+            android:textSize="14sp"
+            android:textColor="#4CAF50"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"/>
+
+        <!-- End Label -->
+        <TextView
+            android:id="@+id/endLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="End"
+            android:textSize="14sp"
+            android:textColor="#F44336"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"/>
+
+        <!-- Progress Bar -->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:layout_toStartOf="@id/endLabel"
+            android:layout_toEndOf="@id/startLabel"
+            android:progressDrawable="@drawable/progress_custom"
+            android:max="10"
+            android:progress="4"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
+    <!-- Details Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Date -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingTop="4dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@android:drawable/ic_menu_today"
+                android:tint="#757575"
+                android:contentDescription="Date Icon"/>
+
+            <TextView
+                android:id="@+id/callDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Date: 04 Sept 2025"
+                android:textColor="#757575"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <!-- Purpose -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingTop="4dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@android:drawable/ic_menu_info_details"
+                android:tint="#757575"
+                android:contentDescription="Purpose Icon"/>
+
+            <TextView
+                android:id="@+id/callPurpose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Purpose: Client Demo"
+                android:textColor="#757575"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <!-- Priority -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingTop="4dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@android:drawable/ic_menu_sort_by_size"
+                android:tint="#757575"
+                android:contentDescription="Priority Icon"/>
+
+            <TextView
+                android:id="@+id/callPriority"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Priority: High"
+                android:textColor="#757575"
+                android:textSize="14sp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
