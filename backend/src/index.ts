@@ -3,8 +3,8 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-const notifyRoutes = require("./routes/notify");
-const registerRoutes = require("./routes/register");
+import notifyRoutes from "./routes/notify";
+import registerRoutes from "./routes/register";
 
 const app = express();
 app.use(bodyParser.json());
@@ -16,7 +16,7 @@ app.use("/api/register", registerRoutes);
 // MongoDB connection
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB connected"))
-  .catch(err => console.error("❌ MongoDB error:", err));
+  .catch((err: any) => console.error("❌ MongoDB error:", err));
 
 const PORT = process.env.PORT || 5000;
 

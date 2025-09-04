@@ -1,9 +1,10 @@
-const express = require("express");
-const DeviceToken = require("../models/DeviceToken");
-const router = express.Router();
+import { Router, Request, Response } from "express";
+import DeviceToken from "../models/DeviceToken";
+
+const router = Router();
 
 // Register token
-router.post("/", async (req, res) => {
+router.post("/", async (req: Request, res: Response) => {
   const { token } = req.body;
 
   if (!token) {
@@ -23,7 +24,7 @@ router.post("/", async (req, res) => {
 });
 
 // Get all tokens (for testing / broadcast)
-router.get("/", async (req, res) => {
+router.get("/", async (_req: Request, res: Response) => {
   try {
     const tokens = await DeviceToken.find().select("token -_id");
     res.json({ success: true, tokens });
@@ -32,4 +33,4 @@ router.get("/", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
